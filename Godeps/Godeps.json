@@ -4,6 +4,10 @@
 	"GodepVersion": "v79",
 	"Deps": [
 		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "0fd8c908d872c921af513ef5091964bbd2e0d904"
+		},
+		{
 			"ImportPath": "github.com/gorilla/websocket",
 			"Comment": "v1.2.0-10-gc908dc8",
 			"Rev": "c908dc801cef474e686e478694c8f9f32e233901"
@@ -12,6 +16,50 @@
 			"ImportPath": "github.com/nlopes/slack",
 			"Comment": "v0.2.0-12-g91c91a1",
 			"Rev": "91c91a11ad0b66b7a690029c56c330ca9f18841b"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "1c05540f6879653db88113bc4a2b70aec4bd491f"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal/app_identity",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal/base",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal/datastore",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal/log",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal/modules",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
+		},
+		{
+			"ImportPath": "google.golang.org/appengine/internal/remote_api",
+			"Comment": "v1.1.0-2-g4216e58",
+			"Rev": "4216e58b9158e5f1c906f1aca75162a46a2ec88a"
 		}
 	]
 }
