@@ -1,0 +1,17 @@
+{
+	"ImportPath": "github.com/JinOketani/slack_image_cmd",
+	"GoVersion": "go1.10",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/websocket",
+			"Comment": "v1.2.0-10-gc908dc8",
+			"Rev": "c908dc801cef474e686e478694c8f9f32e233901"
+		},
+		{
+			"ImportPath": "github.com/nlopes/slack",
+			"Comment": "v0.2.0-12-g91c91a1",
+			"Rev": "91c91a11ad0b66b7a690029c56c330ca9f18841b"
+		}
+	]
+}
