@@ -4,7 +4,6 @@ import (
 	"log"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
 	"strings"
 	"net/http"
 	"os"
@@ -110,7 +109,7 @@ func SearchImage(r *http.Request, text string) string {
 	jsonBytes := ([]byte)(body)
 	data := new(Result)
 	if err := json.Unmarshal(jsonBytes, data); err != nil {
-		fmt.Println("json error:", err)
+		log.Println("json error:", err)
 	}
 
 	if data.Items != nil {
