@@ -80,28 +80,28 @@ type Result struct {
 	} `json:"items"`
 }
 
-func CreateUrl(word string) string {
+func SearchImage(r *http.Request, word string) string {
 	baseUrl := "https://www.googleapis.com/customsearch/v1"
 	s := Search{os.Getenv("CUSTOM_SEARCH_KEY"), os.Getenv("CUSTOM_SEARCH_ENGINE_ID"), "image", "1"}
 	word = strings.TrimSpace(word)
 	url := baseUrl + "?key=" + s.Key + "&cx=" + s.EngineId + "&searchType=" + s.Type + "&num=" + s.Count + "&q=" + word
-	return url
+	return ParseJson(r, url)
 }
 
-func SearchImage(r *http.Request, text string) string {
+func ParseJson(r *http.Request, url string) string {
 	var imageUrl = "not search image"
 	ctx := appengine.NewContext(r)
 	httpClient := urlfetch.Client(ctx)
 
-	resp, err := httpClient.Get(CreateUrl(text))
+	response, err := httpClient.Get(url)
 	if err != nil {
 		log.Fatal(ctx, "html: %v", err)
 	}
-	if resp != nil {
-		defer resp.Body.Close()
+	if response != nil {
+		defer response.Body.Close()
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal(err)
 	}

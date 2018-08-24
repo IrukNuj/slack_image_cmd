@@ -28,8 +28,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	switch s.Command {
 	case "/image":
-		imageUrl := lib.SearchImage(r, s.Text)
-		response := &slack.Msg{Text: imageUrl, ResponseType: "in_channel"}
+		response := &slack.Msg{Text: lib.SearchImage(r, s.Text), ResponseType: "in_channel"}
 		image, err := json.Marshal(response)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
