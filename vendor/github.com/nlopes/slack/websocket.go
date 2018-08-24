@@ -52,7 +52,7 @@ type RTM struct {
 
 // RTMOptions allows configuration of various options available for RTM messaging
 //
-// This structure will evolve in time so please make sure you are always using the
+// This structure will evolve in time so please Makefile sure you are always using the
 // named keys for every entry available as per Go 1 compatibility promise adding fields
 // to this structure should not be considered a breaking change.
 type RTMOptions struct {
