@@ -4,7 +4,6 @@ import (
 	"log"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
 	"strings"
 	"net/http"
 	"os"
@@ -83,12 +82,8 @@ func SearchImage(word string) string {
 	baseUrl := "https://www.googleapis.com/customsearch/v1"
 	s := Search{os.Getenv("CUSTOM_SEARCH_KEY"), os.Getenv("CUSTOM_SEARCH_ENGINE_ID"), "image", "1"}
 	word = strings.TrimSpace(word)
-
 	url := baseUrl + "?key=" + s.Key + "&cx=" + s.EngineId + "&searchType=" + s.Type + "&num=" + s.Count + "&q=" + word
-	log.Println(url)
-
-	imageUrl := ParseJson(url)
-	return imageUrl
+	return ParseJson(url)
 }
 
 func ParseJson(url string) string {
@@ -96,20 +91,21 @@ func ParseJson(url string) string {
 
 	response, err := http.Get(url)
 	if err != nil {
-		log.Println("get error:", err)
+		log.Fatal("get error:", err)
 	}
-
-	defer response.Body.Close()
+	if response != nil {
+		defer response.Body.Close()
+	}
 
 	byteArray, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
 
 	jsonBytes := ([]byte)(byteArray)
 	data := new(Result)
 	if err := json.Unmarshal(jsonBytes, data); err != nil {
-		fmt.Println("json error:", err)
+		log.Println("json error:", err)
 	}
 	if data.Items != nil {
 		imageUrl = data.Items[0].Link
