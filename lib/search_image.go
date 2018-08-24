@@ -8,6 +8,8 @@ import (
 	"strings"
 	"net/http"
 	"os"
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/urlfetch"
 )
 
 type Search struct {
@@ -19,7 +21,7 @@ type Search struct {
 
 type Result struct {
 	Kind string `json:"kind"`
-	URL struct {
+	URL  struct {
 		Type     string `json:"type"`
 		Template string `json:"template"`
 	} `json:"url"`
@@ -67,7 +69,7 @@ type Result struct {
 		Snippet     string `json:"snippet"`
 		HTMLSnippet string `json:"htmlSnippet"`
 		Mime        string `json:"mime"`
-		Image struct {
+		Image       struct {
 			ContextLink     string `json:"contextLink"`
 			Height          int    `json:"height"`
 			Width           int    `json:"width"`
@@ -79,41 +81,40 @@ type Result struct {
 	} `json:"items"`
 }
 
-func SearchImage(word string) string {
+func CreateUrl(word string) string {
 	baseUrl := "https://www.googleapis.com/customsearch/v1"
 	s := Search{os.Getenv("CUSTOM_SEARCH_KEY"), os.Getenv("CUSTOM_SEARCH_ENGINE_ID"), "image", "1"}
 	word = strings.TrimSpace(word)
-
 	url := baseUrl + "?key=" + s.Key + "&cx=" + s.EngineId + "&searchType=" + s.Type + "&num=" + s.Count + "&q=" + word
-	log.Println(url)
-
-	imageUrl := ParseJson(url)
-	return imageUrl
+	return url
 }
 
-func ParseJson(url string) string {
+func SearchImage(r *http.Request, text string) string {
 	var imageUrl = "not search image"
+	ctx := appengine.NewContext(r)
+	httpClient := urlfetch.Client(ctx)
 
-	response, err := http.Get(url)
+	resp, err := httpClient.Get(CreateUrl(text))
 	if err != nil {
-		log.Println("get error:", err)
+		log.Fatal(ctx, "html: %v", err)
+	}
+	if resp != nil {
+		defer resp.Body.Close()
 	}
 
-	defer response.Body.Close()
-
-	byteArray, err := ioutil.ReadAll(response.Body)
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
 
-	jsonBytes := ([]byte)(byteArray)
+	jsonBytes := ([]byte)(body)
 	data := new(Result)
 	if err := json.Unmarshal(jsonBytes, data); err != nil {
 		fmt.Println("json error:", err)
 	}
+
 	if data.Items != nil {
 		imageUrl = data.Items[0].Link
-		log.Println(imageUrl)
 	}
 
 	return imageUrl
