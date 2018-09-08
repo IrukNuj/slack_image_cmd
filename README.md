@@ -23,7 +23,6 @@ This bot will reply the image URL to the slash command.
 - get "Verification Token"
 
 ### 4. Environment
-- `PORT`: Server port, Default `8080`
 - `VERIFICATION_TOKEN`: Slack vertification token
 - `CUSTOM_SEARCH_KEY`: Google custom search api key
 - `CUSTOM_SEARCH_ENGINE_ID`: Google custom search engine ID
@@ -35,7 +34,7 @@ This bot will reply the image URL to the slash command.
 
 ### Run
 ```
-# Start ngrok port 8080
+# Start ngrok port 8080 OR other port
 $ ngrok 8080
 # Start go server
 $ go run main.go
