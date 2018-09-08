@@ -20,17 +20,25 @@ This bot will reply the image URL to the slash command.
 - select "Slash Command"
 - create new slash command
 - select "Basic informaition"
-- get Verification Token -> VERIFICATION_TOKEN
+- get "Verification Token"
 
-### 4. Add environment value
-- VERIFICATION_TOKEN
-- CUSTOM_SEARCH_KEY
-- CUSTOM_SEARCH_ENGINE_ID
+### 4. Environment
+- `PORT`: Server port, Default `8080`
+- `VERIFICATION_TOKEN`: Slack vertification TOKEN
+- `CUSTOM_SEARCH_KEY`: Google custom search API KEY
+- `CUSTOM_SEARCH_ENGINE_ID`: Google custom search engine ID
 
 ## Local build
 ### Execution
 1. installed ngrok
 2. innstalled go v1.10.1
-3. set $GOPATH,GOROOT
+
 ### Run
-- 
+```
+# Start ngrok port 8080
+$ ngrok 8080
+# Start go server
+go run main.go
+# Stop ngrok OR go server
+$ ctrl + c
+```
