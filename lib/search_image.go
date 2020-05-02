@@ -30,7 +30,7 @@ type Result struct {
 func SearchImage(word string) string {
 	baseUrl := "https://www.googleapis.com/customsearch/v1"
 	s := Search{os.Getenv("CUSTOM_SEARCH_KEY"), os.Getenv("CUSTOM_SEARCH_ENGINE_ID"), "image", "1"}
-	word = strings.TrimSpace(word)
+	word = strings.Replace(word, " ", "+", -1)
 	url := baseUrl + "?key=" + s.Key + "&cx=" + s.EngineId + "&searchType=" + s.Type + "&num=" + s.Count + "&q=" + word
 	return ParseJson(url)
 }
